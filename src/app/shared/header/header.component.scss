@@ -5,9 +5,13 @@ $tangerine: var(--ion-color-tangerine);
 $background: var(--ion-color-background);
 
 ion-header {
-    padding: 5px;
 
-    ion-title {
+    ion-toolbar {
+        padding: 5px;
+    }
+
+    span {
+        margin-left: 8px;
         font-weight: 600;
         color: $purple2;
     }

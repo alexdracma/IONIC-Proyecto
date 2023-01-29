@@ -1,9 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title slot="start">myEverything</ion-title>
-    <ion-buttons slot="end">
+    <span>myEverything</span>
+  
+  <ion-buttons slot="end">
       <ion-button (click)="addWidget()">
         <ion-icon name="add"></ion-icon>
+      </ion-button>
+      <ion-button (click)="editWidgets()">
+        <ion-icon name="create-outline"></ion-icon>
       </ion-button>
       <ion-button>
         <ion-icon name="person"></ion-icon>
@@ -11,6 +15,6 @@
       <ion-button>
         <ion-icon name="settings"></ion-icon>
       </ion-button>
-    </ion-buttons>
+  </ion-buttons>
   </ion-toolbar>
 </ion-header>

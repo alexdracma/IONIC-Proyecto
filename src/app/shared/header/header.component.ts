@@ -14,4 +14,8 @@ export class HeaderComponent {
     this.widgetService.addWidget();
   }
 
+  editWidgets() {
+    this.widgetService.editWidgets();
+  }
+
 }

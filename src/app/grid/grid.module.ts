@@ -3,16 +3,20 @@ import { CommonModule } from '@angular/common';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HeaderComponent } from './header/header.component';
+import { GridComponent } from './grid.component';
+
+//Libraries
+import { NgxWidgetGridModule } from 'ngx-widget-grid';
 
 @NgModule({
-  declarations: [HeaderComponent],
+  declarations: [GridComponent],
   imports: [
     CommonModule,
     IonicModule,
+    NgxWidgetGridModule,
   ],
   exports: [
-    HeaderComponent
+    GridComponent
   ]
 })
-export class SharedModule { }
+export class GridModule { }

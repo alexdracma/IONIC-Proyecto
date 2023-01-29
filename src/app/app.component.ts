@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { ActionSheetController } from '@ionic/angular';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -8,14 +10,45 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
 
-  // private _receivedEvent: Event
+  constructor(private actionSheetCtrl: ActionSheetController) { }
+  
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Codeswag ActionSheet',
+      buttons: [
+        {}, {}, {}, {}
+      ],
+      cssClass: 'custom-css',
+      animated: true,
+      backdropDismiss: true,
+      keyboardClose: false,
+      mode: 'ios'
+    })
 
-  // receiveEvent($event) {
-  //   this._recivedEvent = $event
-  // }
+    actionSheet.present()
+  }
 
-  // get receivedEvent() {
-  //   return this._recivedEvent
-  // }
+  public actionSheetButtons = [
+    {
+      text: 'Delete',
+      role: 'destructive',
+      data: {
+        action: 'delete'
+      }
+    },
+    {
+      text: 'Share',
+      data: {
+        action: 'share'
+      }
+    },
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      data: {
+        action: 'cancel'
+      }
+    }
+  ];
   
 }

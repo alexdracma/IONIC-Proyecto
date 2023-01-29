@@ -1,6 +1,7 @@
 import { AfterViewInit, Injectable, ViewChild } from '@angular/core';
 import { GridComponent } from '../grid/grid.component';
 import { NgxWidgetGridComponent } from 'ngx-widget-grid';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,10 @@ export class WidgetService implements AfterViewInit{
 
   @ViewChild(GridComponent) gridComponent: any;
 
-  private _grid : NgxWidgetGridComponent;
+  private _grid: NgxWidgetGridComponent;
+  private _editable: boolean = false;
+
+  constructor( private toastCtrl: ToastController) {}
 
   public set grid(grid: NgxWidgetGridComponent) {
     this._grid = grid
@@ -24,51 +28,59 @@ export class WidgetService implements AfterViewInit{
   }
 
   private _widgets:any[] = [
-    {
-      top: 1,
-      left: 1,
-      height: 2,
-      width: 2,
-      color: this.generateHslaColors(),
-      text: 'Hello'
-    },
-    {
-      top: 3,
-      left: 3,
-      height: 1,
-      width: 1,
-      color: this.generateHslaColors(),
-      text: 'Foo'
-    }, {
-      top: 4,
-      left: 4,
-      height: 2,
-      width: 2,
-      color: this.generateHslaColors(),
-      text: 'Bar'
-    }
   ]
 
   public get widgets() {
     return [...this._widgets]
   }
 
-  
+  public get editable() {
+    return this._editable
+  }
+
+  editWidgets() {
+    this._editable = !(this._editable)
+  }
 
   addWidget() {
     const nextPosition = this._grid.getNextPosition();
-    //console.log(nextPosition)
     if (nextPosition) {
-      this._widgets.push({color: this.generateHslaColors(), ...nextPosition, text: 'lala'});
-      console.log(this._widgets)
+      this._widgets.push({color: this.generateHslaColors(), ...nextPosition, text: '', width: 1, height: 1});
     } else {
-      console.warn('No Space Available!! ');
-      alert('No hay sitio disponible!')
+      this.presentToast('No more space available!')
     }
   }
 
-  deleteWidget() {
-    console.log('widget deleted')
+  async presentToast(message: string) {
+
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom'
+    })
+    
+    toast.present()
+  }
+
+  async askDeleteWidget(index: number) {
+
+    const alert = await this.toastCtrl.create({
+      message: 'Do you wish to delete the selected widget?',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {}
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this._widgets.splice(index, 1);
+          }
+        }
+      ]
+    })
+
+    alert.present()
   }
 
   generateHslaColors(saturation? : any, lightness? : any, alpha? : any) {
