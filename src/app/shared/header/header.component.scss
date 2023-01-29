@@ -1,0 +1,19 @@
+/* Variables */
+$purple1: var(--ion-color-purple1);
+$purple2: var(--ion-color-purple2);
+$tangerine: var(--ion-color-tangerine);
+$background: var(--ion-color-background);
+
+ion-header {
+    padding: 5px;
+
+    ion-title {
+        font-weight: 600;
+        color: $purple2;
+    }
+
+    ion-icon {
+        color: $purple2;
+        font-size: 28px;
+    }
+}
