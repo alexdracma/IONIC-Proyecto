@@ -1,4 +1,4 @@
-import { Component , AfterViewInit , ViewChild, Renderer2 } from '@angular/core';
+import { Component , AfterViewInit , ViewChild } from '@angular/core';
 import { NgxWidgetGridComponent, WidgetPositionChange } from 'ngx-widget-grid';
 import { WidgetService } from '../services/widget.service';
 
@@ -12,8 +12,7 @@ export class GridComponent implements AfterViewInit {
   public rows = 3;
   public cols = 2;
 
-  constructor(private widgetService: WidgetService,
-    private renderer: Renderer2) { }
+  constructor(private widgetService: WidgetService) { }
 
   @ViewChild('grid', { static: true }) grid: NgxWidgetGridComponent;
 

@@ -5,11 +5,12 @@ import { IonicModule } from '@ionic/angular';
 
 import { HeaderComponent } from './header/header.component';
 
+
 @NgModule({
   declarations: [HeaderComponent],
   imports: [
     CommonModule,
-    IonicModule,
+    IonicModule
   ],
   exports: [
     HeaderComponent

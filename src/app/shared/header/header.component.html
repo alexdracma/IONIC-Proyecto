@@ -3,14 +3,34 @@
     <span>myEverything</span>
   
   <ion-buttons slot="end">
-      <ion-button (click)="addWidget()">
+      
+      <ion-button (click)="presentAddWidgetPopover($event)">
         <ion-icon name="add"></ion-icon>
       </ion-button>
+      <ion-popover #addWgdtPopover [isOpen]="isAddWdgtPopoverOpen" (didDismiss) = "isAddWdgtPopoverOpen = false">
+        <ng-template>
+          <ion-list lines="full">
+            <ion-item (click)="addWidget()">
+              <ion-label>Pa</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Pe</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Pu</ion-label>
+            </ion-item>
+          </ion-list>
+        </ng-template>
+      </ion-popover>
+
       <ion-button (click)="editWidgets()">
         <ion-icon name="create-outline"></ion-icon>
       </ion-button>
-      <ion-button>
+      <ion-button (click)="navigate('/login')">
         <ion-icon name="person"></ion-icon>
+      </ion-button>
+      <ion-button (click)="logout()">
+        <ion-icon name="person-outline"></ion-icon>
       </ion-button>
       <ion-button>
         <ion-icon name="settings"></ion-icon>
