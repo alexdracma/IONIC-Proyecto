@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { WidgetService } from '../../services/widget.service';
+import { WidgetService } from '../../grid/services/widget.service';
 import { Router } from '@angular/router';
-import { UserService } from '../../authentication/services/user.service';
+import { AuthService } from '../../authentication/services/auth.service';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'main-header',
@@ -15,7 +16,8 @@ export class HeaderComponent {
 
   constructor(private widgetService: WidgetService,
     private router: Router,
-    private userService: UserService) { }
+    private authService: AuthService,
+    private actionSheetCtrl: ActionSheetController) { }
 
   addWidget() {
     this.widgetService.addWidget();
@@ -35,7 +37,27 @@ export class HeaderComponent {
     this.router.navigate([navigateTo])
   }
 
-  logout() {
-    this.userService.logout();
+  async logout() {
+    await this.authService.logout();
+    this.router.navigate(['/login'])
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Options',
+      buttons: [
+        {
+          text: 'Log out',
+          icon: 'log-out',
+          handler: () => this.logout()
+        }
+      ],
+      animated: true,
+      backdropDismiss: true,
+      keyboardClose: true,
+      mode: 'ios'
+    })
+
+    actionSheet.present()
   }
 }

@@ -11,13 +11,13 @@
         <ng-template>
           <ion-list lines="full">
             <ion-item (click)="addWidget()">
-              <ion-label>Pa</ion-label>
+              <ion-label>Add Widget</ion-label>
             </ion-item>
             <ion-item>
-              <ion-label>Pe</ion-label>
+              <ion-label>Test put in db</ion-label>
             </ion-item>
             <ion-item>
-              <ion-label>Pu</ion-label>
+              <ion-label>Reload</ion-label>
             </ion-item>
           </ion-list>
         </ng-template>
@@ -26,13 +26,7 @@
       <ion-button (click)="editWidgets()">
         <ion-icon name="create-outline"></ion-icon>
       </ion-button>
-      <ion-button (click)="navigate('/login')">
-        <ion-icon name="person"></ion-icon>
-      </ion-button>
-      <ion-button (click)="logout()">
-        <ion-icon name="person-outline"></ion-icon>
-      </ion-button>
-      <ion-button>
+      <ion-button (click)="presentActionSheet()">
         <ion-icon name="settings"></ion-icon>
       </ion-button>
   </ion-buttons>

@@ -5,19 +5,20 @@ import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss']
+  selector: 'app-register',
+  templateUrl: './register.page.html',
+  styleUrls: ['./register.page.scss'],
 })
-export class LoginPage {
+export class RegisterPage {
 
-  formLogin: FormGroup
+  formRegister: FormGroup
 
   constructor(private authService: AuthService,
     private router: Router,
     private toastController: ToastController) { 
     
-    this.formLogin = new FormGroup({
+    this.formRegister = new FormGroup({
+      name: new FormControl(),
       email: new FormControl(),
       password: new FormControl()
     })
@@ -28,15 +29,15 @@ export class LoginPage {
   }
 
   async onSubmit() {
-    
-    const result = await this.authService.login(this.formLogin.value)
 
-    if ( result === 'correct' ) {
-      this.navigate('/') //go to dashboard
+    const response = await this.authService.register(this.formRegister.value) //when it registers the user it also authenticates it automatically
+      
+    if (response === 'correct') {
+        this.navigate('/') //go to dashboard
     } else {
-      switch (result) {
-        case 'auth/wrong-password':
-          this.presentErrorToast('The password you entered is incorrect')
+      switch (response) {
+        case 'missing-name':
+          this.presentErrorToast('You have to provide a name')
           break;
         case 'auth/missing-email':
           this.presentErrorToast('You have to provide an email')
@@ -44,14 +45,17 @@ export class LoginPage {
         case 'missing-password':
           this.presentErrorToast('You have to provide a password')
           break;
+        case 'auth/email-already-in-use':
+          this.presentErrorToast('The email is already in use')
+          break;
+        case 'auth/weak-password':
+          this.presentErrorToast('The password you entered is too weak')
+          break;
         case 'auth/invalid-email':
           this.presentErrorToast('The email you provided is not valid')
           break;
-        case 'auth/user-not-found':
-          this.presentErrorToast('The user does not exist')
-          break;
         default:
-          console.warn(result)
+          console.warn(response)
           this.presentErrorToast('Error, try again')
           break;
       }
@@ -69,4 +73,5 @@ export class LoginPage {
 
     await toast.present()
   }
+
 }

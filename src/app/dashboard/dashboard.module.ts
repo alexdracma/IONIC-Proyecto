@@ -13,7 +13,7 @@ import { SharedModule } from '../shared/shared.module';
 import { GridModule } from '../grid/grid.module';
 //My components
 //My services
-import { WidgetService } from '../services/widget.service';
+import { WidgetService } from '../grid/services/widget.service';
 
 @NgModule({
   imports: [

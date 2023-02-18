@@ -20,9 +20,10 @@ import { SharedModule } from './shared/shared.module';
 import { GridModule } from './grid/grid.module';
 //My components
 //My services
-import { WidgetService } from './services/widget.service';
+import { WidgetService } from './grid/services/widget.service';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,6 +40,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
     AngularFireDatabaseModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     WidgetService

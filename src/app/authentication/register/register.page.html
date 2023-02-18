@@ -2,9 +2,13 @@
   <div class="forms">
     <div class="form-content">
       <div class="login-form">
-        <div class="title">Login</div>
-        <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+        <div class="title">Register</div>
+        <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
           <div class="input-boxes">
+            <div class="input-box">
+              <ion-icon name="person-outline"></ion-icon>
+              <input type="text" formControlName="name" placeholder="Enter your name" required>
+            </div>
             <div class="input-box">
               <ion-icon name="mail-outline"></ion-icon>
               <input type="email" formControlName="email" placeholder="Enter your email" required>
@@ -13,11 +17,10 @@
               <ion-icon name="lock-closed-outline"></ion-icon>
               <input type="password" formControlName="password" placeholder="Enter your password" required>
             </div>
-            <div class="text"><a href="#">Forgot password?</a></div>
             <div class="button input-box">
-              <input type="submit" value="Login">
+              <input type="submit" value="Register">
             </div>
-            <div class="text sign-up-text">Don't have an account? <label (click)="navigate('/register')">Sigup now</label></div>
+            <div class="text sign-up-text">Already have an account? <label (click)="navigate('/login')">Login now</label></div>
           </div>
         </form>
       </div>

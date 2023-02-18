@@ -1,6 +1,6 @@
 import { Component , AfterViewInit , ViewChild } from '@angular/core';
 import { NgxWidgetGridComponent, WidgetPositionChange } from 'ngx-widget-grid';
-import { WidgetService } from '../services/widget.service';
+import { WidgetService } from './services/widget.service';
 
 @Component({
   selector: 'grid',
@@ -33,6 +33,7 @@ export class GridComponent implements AfterViewInit {
   }
 
   onWidgetChange(event: WidgetPositionChange) {
+    this.widgetService.updateWidgetsArr(event)
   }
 
   public onGridFull(e : any) {

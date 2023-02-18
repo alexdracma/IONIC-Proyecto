@@ -1,19 +1,30 @@
-import { AfterViewInit, Injectable, ViewChild } from '@angular/core';
-import { GridComponent } from '../grid/grid.component';
-import { NgxWidgetGridComponent } from 'ngx-widget-grid';
+import { Injectable, ViewChild } from '@angular/core';
+import { GridComponent } from '../grid.component';
+import { NgxWidgetGridComponent, WidgetPositionChange } from 'ngx-widget-grid';
 import { ToastController } from '@ionic/angular';
+import { UserService } from '../../authentication/services/user.service';
+import { DatabaseService } from '../../services/database.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WidgetService implements AfterViewInit{
+  
+export class WidgetService {
 
   @ViewChild(GridComponent) gridComponent: any;
 
   private _grid: NgxWidgetGridComponent;
   private _editable: boolean = false;
+  private _widgets:any[] = []
 
-  constructor( private toastCtrl: ToastController) {}
+  constructor(private toastCtrl: ToastController,
+    private userService: UserService,
+    private dbService: DatabaseService) {
+    
+    this.userService.widgetSubject.subscribe((widgets) => {
+      this._widgets = widgets
+    })
+  }
 
   public set grid(grid: NgxWidgetGridComponent) {
     this._grid = grid
@@ -23,19 +34,30 @@ export class WidgetService implements AfterViewInit{
     return this._grid
   }
 
-  ngAfterViewInit(): void {
-    this._grid = this.gridComponent.test;
-  }
-
-  private _widgets:any[] = [
-  ]
-
   public get widgets() {
     return [...this._widgets]
   }
 
   public get editable() {
     return this._editable
+  }
+
+  widgetsTimer: any
+  widgetsInterval: number = 10000 //10s
+
+  public updateWidgetsArr(changedWidget: WidgetPositionChange) {
+    this._widgets[changedWidget.index].top = changedWidget.newPosition['top']
+    this._widgets[changedWidget.index].left = changedWidget.newPosition['left']
+    this._widgets[changedWidget.index].width = changedWidget.newPosition['width']
+    this._widgets[changedWidget.index].height = changedWidget.newPosition['height']
+
+    //Only save widgets to the database if it's been widgetsInterval ms since the last change
+    clearTimeout(this.widgetsTimer)
+    this.widgetsTimer = setTimeout( () => this.saveWidgetsToDB(), this.widgetsInterval);
+  }
+
+  private saveWidgetsToDB() {
+    this.dbService.saveWidgets(this._widgets)
   }
 
   editWidgets() {
