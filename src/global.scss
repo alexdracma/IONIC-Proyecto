@@ -27,3 +27,13 @@
 
 /* Fonts */
 @import "theme/fonts";
+
+$purple2: var(--ion-color-purple2);
+
+ion-icon.deleteButton {
+    font-size: 2rem;
+    position: absolute;
+    color: $purple2;
+    z-index: 100000;
+    cursor: pointer;
+}

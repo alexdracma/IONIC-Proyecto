@@ -64,10 +64,10 @@ export class WidgetService {
     this._editable = !(this._editable)
   }
 
-  addWidget() {
+  addWidget(widget: string) {
     const nextPosition = this._grid.getNextPosition();
     if (nextPosition) {
-      this._widgets.push({color: this.generateHslaColors(), ...nextPosition, text: '', width: 1, height: 1});
+      this._widgets.push({color: this.generateHslaColors(), ...nextPosition, text: widget, width: 1, height: 1});
     } else {
       this.presentToast('No more space available!')
     }

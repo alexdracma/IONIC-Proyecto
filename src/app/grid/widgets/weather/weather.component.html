@@ -1,0 +1,74 @@
+<div class="cont">
+  <ion-icon name="close-outline" class="deleteButton" (click)="askDeleteWidget()" 
+    *ngIf="editable"></ion-icon>
+  
+  <div *ngIf="size[0] > 1; else smallData" style="height:100%;width:100%;" >
+    <ion-grid class="long">
+      <ion-row>
+        <ion-col *ngFor="let day of weatherData" class="main">
+          <ion-row>
+            <ion-col>{{day.date | toString | slice:-2}}/{{day.date | toString | slice:-4:-2}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col [ngSwitch]="day.weather">
+              <ion-icon *ngSwitchCase="'clear'" name="sunny-outline"></ion-icon>
+              <ion-icon *ngSwitchCase="'pcloudy'" name="partly-sunny-outline"></ion-icon>
+              <ion-icon *ngSwitchCase="'cloudy'" name="cloudy-outline"></ion-icon>
+              <ion-icon *ngSwitchCase="'lightsnow'" name="snow-outline"></ion-icon>
+              <ion-icon *ngSwitchCase="'lightrain'" name="rainy-outline"></ion-icon>
+              <ion-icon *ngSwitchCase="'rain'" name="rainy-outline"></ion-icon>
+              <ion-icon *ngSwitchCase="'mcloudy'" name="partly-sunny-outline"></ion-icon>
+              <ion-icon *ngSwitchCase="'tsrain'" name="thunderstorm-outline"></ion-icon>
+              <ion-icon *ngSwitchCase="'ts'" name="flash-outline"></ion-icon>
+              <ion-icon *ngSwitchCase="'rainsnow'" name="snow-outline"></ion-icon>
+              <ion-icon *ngSwitchCase="'snow'" name="snow-outline"></ion-icon>
+              <ion-icon *ngSwitchCase="'ishower'" name="rainy-outline"></ion-icon>
+              <ion-icon *ngSwitchCase="'oshower'" name="rainy-outline"></ion-icon>
+              <ion-icon *ngSwitchCase="'humid'" name="cloudy-outline"></ion-icon>
+              <ion-icon *ngSwitchDefault name="cloudy-outline"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>{{day.temp2m.min}}°C</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>{{day.temp2m.max}}°C</ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ng-template #smallData>
+    <ion-grid *ngFor="let day of weatherData | slice:0:1" class="short">
+      <ion-row>
+        <ion-col class="big">{{day.date | toString | slice:-2}}/{{day.date | toString | slice:-4:-2}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col [ngSwitch]="day.weather">
+          <ion-icon *ngSwitchCase="'clear'" name="sunny-outline"></ion-icon>
+          <ion-icon *ngSwitchCase="'pcloudy'" name="partly-sunny-outline"></ion-icon>
+          <ion-icon *ngSwitchCase="'cloudy'" name="cloudy-outline"></ion-icon>
+          <ion-icon *ngSwitchCase="'lightsnow'" name="snow-outline"></ion-icon>
+          <ion-icon *ngSwitchCase="'lightrain'" name="rainy-outline"></ion-icon>
+          <ion-icon *ngSwitchCase="'rain'" name="rainy-outline"></ion-icon>
+          <ion-icon *ngSwitchCase="'mcloudy'" name="partly-sunny-outline"></ion-icon>
+          <ion-icon *ngSwitchCase="'tsrain'" name="thunderstorm-outline"></ion-icon>
+          <ion-icon *ngSwitchCase="'ts'" name="flash-outline"></ion-icon>
+          <ion-icon *ngSwitchCase="'rainsnow'" name="snow-outline"></ion-icon>
+          <ion-icon *ngSwitchCase="'snow'" name="snow-outline"></ion-icon>
+          <ion-icon *ngSwitchCase="'ishower'" name="rainy-outline"></ion-icon>
+          <ion-icon *ngSwitchCase="'oshower'" name="rainy-outline"></ion-icon>
+          <ion-icon *ngSwitchCase="'humid'" name="cloudy-outline"></ion-icon>
+          <ion-icon *ngSwitchDefault name="cloudy-outline"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          Min.{{day.temp2m.min}}°C Max.{{day.temp2m.max}}°C
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-template>
+
+</div>

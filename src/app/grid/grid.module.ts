@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
 import { GridComponent } from './grid.component';
+import { WidgetsModule } from './widgets/widgets.module';
 
 //Libraries
 import { NgxWidgetGridModule } from 'ngx-widget-grid';
@@ -14,6 +15,7 @@ import { NgxWidgetGridModule } from 'ngx-widget-grid';
     CommonModule,
     IonicModule,
     NgxWidgetGridModule,
+    WidgetsModule
   ],
   exports: [
     GridComponent

@@ -1,5 +1,3 @@
-$purple2: var(--ion-color-purple2);
-
 context-menu {
     visibility: hidden;
     position: absolute;
@@ -8,12 +6,4 @@ context-menu {
 .visible-menu {
     visibility: visible;
     z-index: 21;
-}
-
-ion-icon.deleteButton {
-    font-size: 2rem;
-    position: absolute;
-    color: $purple2;
-    z-index: 21;
-    cursor: pointer;
 }

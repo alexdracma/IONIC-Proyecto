@@ -1,0 +1,44 @@
+ion-grid.long {
+    height: 100%;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 600;
+
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    ion-col.main {
+        margin: 0 4px;
+    }
+
+    ion-icon {
+        font-size: 2rem
+    }
+}
+
+ion-grid.short {
+    height: 100%;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: 600;
+
+    ion-icon {
+        font-size: 4rem;
+    }
+}
+
+.cont {
+    background-color: rgb(247, 165, 64);
+    color: purple;
+    height:100%;
+    width:100%; 
+    display:flex;
+}

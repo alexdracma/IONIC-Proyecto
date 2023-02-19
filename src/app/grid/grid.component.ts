@@ -1,4 +1,4 @@
-import { Component , AfterViewInit , ViewChild } from '@angular/core';
+import { Component , AfterViewInit , ViewChild, ViewContainerRef } from '@angular/core';
 import { NgxWidgetGridComponent, WidgetPositionChange } from 'ngx-widget-grid';
 import { WidgetService } from './services/widget.service';
 
@@ -28,7 +28,7 @@ export class GridComponent implements AfterViewInit {
     return this.widgetService.widgets
   }
 
-  askDeleteWidget(index: number) {
+  askDeleteWidget(index: number): void {
     this.widgetService.askDeleteWidget(index)
   }
 

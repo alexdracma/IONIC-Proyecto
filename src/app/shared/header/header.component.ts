@@ -19,8 +19,8 @@ export class HeaderComponent {
     private authService: AuthService,
     private actionSheetCtrl: ActionSheetController) { }
 
-  addWidget() {
-    this.widgetService.addWidget();
+  addWidget(widget: string) {
+    this.widgetService.addWidget(widget);
     this.addWdgtPopover.dismiss();
   }
 
